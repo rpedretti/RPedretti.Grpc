@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "RPedretti.Grpc";
+
+package movies;
+
+service Movies {
+  rpc GetById (IdRequest) returns (MovieResponse);
+  rpc SearchByCriteria (SearchCriteria) returns (MultipleMoviesReply);
+}
+
+message IdRequest {
+    int32 id = 1;
+}
+
+message SearchCriteria {
+  string name = 1;
+  google.protobuf.Timestamp releaseDate = 2;
+}
+
+message MovieResponse {
+    Movie movie = 1;
+}
+
+message Movie {
+  string title = 1;
+  google.protobuf.Timestamp releaseDate = 2;
+}
+
+message MultipleMoviesReply {
+  repeated Movie movies = 1;
+}

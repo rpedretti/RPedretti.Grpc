@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29521.150
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.Grpc.Server", "RPedretti.Grpc.Server\RPedretti.Grpc.Server.csproj", "{A6D64F9A-C94B-45CB-BC36-F0BCC98BF444}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protos", "Protos", "{30E4F1F6-CBFC-4E76-A824-C00707FE283A}"
+	ProjectSection(SolutionItems) = preProject
+		Protos\movies.proto = Protos\movies.proto
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.Grpc.Shared", "RPedretti.Grpc.Shared\RPedretti.Grpc.Shared.csproj", "{22BF8631-8089-4677-8FD1-107B5275E841}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{15A90975-CB96-4218-B4D8-E7DC19A3DD03}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{4E15E16F-D4EA-4A23-8EF3-1E8992DDED5C}"
+	ProjectSection(SolutionItems) = preProject
+		Conf\nginx.conf = Conf\nginx.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{85ABD0C0-C1AE-417E-9340-6EC0E9703FD4}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\init_db.sql = Scripts\init_db.sql
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.Grpc.DAL", "RPedretti.Grpc.DAL\RPedretti.Grpc.DAL.csproj", "{E0E0506D-D3D5-4EE8-9F08-5EE5DFA582FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.Grpc.Wpf.Client", "RPedretti.Grpc.Wpf.Client\RPedretti.Grpc.Wpf.Client.csproj", "{C4DF55B3-D218-4BBE-B218-C89745420E8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6D64F9A-C94B-45CB-BC36-F0BCC98BF444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D64F9A-C94B-45CB-BC36-F0BCC98BF444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D64F9A-C94B-45CB-BC36-F0BCC98BF444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D64F9A-C94B-45CB-BC36-F0BCC98BF444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22BF8631-8089-4677-8FD1-107B5275E841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22BF8631-8089-4677-8FD1-107B5275E841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22BF8631-8089-4677-8FD1-107B5275E841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22BF8631-8089-4677-8FD1-107B5275E841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0E0506D-D3D5-4EE8-9F08-5EE5DFA582FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0E0506D-D3D5-4EE8-9F08-5EE5DFA582FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0E0506D-D3D5-4EE8-9F08-5EE5DFA582FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0E0506D-D3D5-4EE8-9F08-5EE5DFA582FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4DF55B3-D218-4BBE-B218-C89745420E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4DF55B3-D218-4BBE-B218-C89745420E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4DF55B3-D218-4BBE-B218-C89745420E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4DF55B3-D218-4BBE-B218-C89745420E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCA262C8-1AFE-4B46-83F3-71BE3761C7A9}
+	EndGlobalSection
+EndGlobal
