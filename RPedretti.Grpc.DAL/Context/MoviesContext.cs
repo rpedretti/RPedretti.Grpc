@@ -9,7 +9,7 @@ namespace RPedretti.Grpc.DAL.Context
 {
     public class MoviesContext : DbContext
     {
-        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Movie>? Movies { get; set; } = null;
 
         public MoviesContext() : base()
         {

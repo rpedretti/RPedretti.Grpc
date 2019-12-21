@@ -1,9 +1,9 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using RJPSoft.HelperExtensions;
+﻿using RJPSoft.HelperExtensions;
+using RPedretti.Grpc.Client.Shared.Models;
+using RPedretti.Grpc.Client.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,11 +16,11 @@ namespace RPedretti.Grpc.Wpf.Client
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private bool isSearchEnabled = false;
-        private readonly Movies.MoviesClient _moviesClient;
 
-        private IEnumerable<MovieModel> _movies;
+        private IEnumerable<MovieModel>? _movies;
+        private readonly IMovieService _movieService;
 
-        public IEnumerable<MovieModel> Movies
+        public IEnumerable<MovieModel>? Movies
         {
             get { return _movies; }
             set
@@ -46,37 +46,32 @@ namespace RPedretti.Grpc.Wpf.Client
             }
         }
 
-        public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        public void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public MainWindow(Movies.MoviesClient moviesClient)
+        public MainWindow(IMovieService movieService)
         {
             InitializeComponent();
-            _moviesClient = moviesClient;
+            _movieService = movieService;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private async void Search_Click(object sender, RoutedEventArgs e)
         {
-            var criteria = new SearchCriteria
+            var criteria = new Grpc.Client.Shared.Models.SearchCriteria
             {
-                Name = TitleInput.Text
+                Title = TitleInput.Text,
+                ReleaseDate = ReleaseDateInput.SelectedDate.Let(d =>
+                {
+                    var utc = DateTime.SpecifyKind(d, DateTimeKind.Utc);
+                    return utc;
+                })
             };
-            ReleaseDateInput.SelectedDate.Run(d =>
-            {
-                var utc = DateTime.SpecifyKind(d, DateTimeKind.Utc);
-                criteria.ReleaseDate = Timestamp.FromDateTime(utc);
-            });
 
-            var movie = await _moviesClient.SearchByCriteriaAsync(criteria);
-            Movies = movie.Movies.Select(m => new MovieModel
-            {
-                Title = m.Title,
-                ReleaseDate = m.ReleaseDate.ToDateTime()
-            });
+            Movies = await _movieService.FindByCriteria(criteria);
         }
 
         private void TitleInput_TextChanged(object sender, TextChangedEventArgs e)

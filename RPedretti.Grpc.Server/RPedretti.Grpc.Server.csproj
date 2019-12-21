@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.25.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RPedretti.Grpc.DAL\RPedretti.Grpc.DAL.csproj" />
     <ProjectReference Include="..\RPedretti.Grpc.Shared\RPedretti.Grpc.Shared.csproj" />
   </ItemGroup>

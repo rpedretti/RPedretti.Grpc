@@ -1,0 +1,89 @@
+﻿<Page
+    x:Class="RPedretti.Grpc.Uwp.Client.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:RPedretti.Grpc.Uwp.Client.Converters"
+    xmlns:globalization="using:System.Globalization"
+    xmlns:sharedModels="using:RPedretti.Grpc.Client.Shared.Models"
+    Style="{StaticResource PageStyle}"
+    xmlns:prismMvvm="using:Prism.Windows.Mvvm"
+    prismMvvm:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converters:TimeConverter x:Key="TimeConverter"/>
+    </Page.Resources>
+    
+        <Grid
+            Grid.Row="1"
+            RowSpacing="8"
+            Padding="10"
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <Grid.Resources>
+                <SolidColorBrush x:Key="border" Color="Red"/>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Name="TitleLabel" Text="Title: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="Auto"/>
+            <TextBox
+                x:Name="TitleInput"
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{x:Bind ViewModel.Model.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Name="DateLabel" Text="Release date: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Height="Auto"/>
+            <CalendarDatePicker
+                x:Name="DateInput"
+                Grid.Row="1"
+                Grid.Column="1"
+                MinWidth="100"
+                VerticalAlignment="Center"
+                DateFormat="{}{year.full}/{month.integer}/{day.integer}"
+                Date="{x:Bind ViewModel.Model.ReleaseDate, Mode=TwoWay, Converter={StaticResource TimeConverter}}">
+            </CalendarDatePicker>
+
+            <Button
+                Content="Search"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Click="{x:Bind ViewModel.Search}"
+                IsEnabled="{x:Bind ViewModel.IsSearchEnabled, Mode=OneWay}"
+                Margin="0,0,0,6"/>
+            <Border
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                BorderBrush="{StaticResource border}"
+                BorderThickness="0,0,0,1"/>
+            <ListView
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                ItemsSource="{x:Bind ViewModel.Model.Movies, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="sharedModels:MovieModel">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Title:" Margin="0,0,4,0" />
+                                <TextBlock Text="{x:Bind Title}" FontWeight="Bold" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Release Date: " Margin="0,0,4,0" />
+                                <TextBlock Text="{x:Bind ReleaseDate.ToString('yyyy/MM/dd', globalization:CultureInfo.CurrentCulture)}" FontWeight="Bold" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+</Page>

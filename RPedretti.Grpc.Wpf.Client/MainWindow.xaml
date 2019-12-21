@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RPedretti.Grpc.Wpf.Client"
+        xmlns:sharedMoldels="clr-namespace:RPedretti.Grpc.Client.Shared.Models;assembly=RPedretti.Grpc.Client.Shared"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="MainWindow" Height="450" Width="800">
@@ -29,14 +30,17 @@
                     Click="Search_Click"/>
             <ListView x:Name="Result" ItemsSource="{Binding Movies}">
                 <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="Title: " />
-                            <TextBlock Text="{Binding Title}" FontWeight="Bold" />
-                            <TextBlock Text=", " />
-                            <TextBlock Text="Release Date: " />
-                            <TextBlock Text="{Binding ReleaseDate, StringFormat='yyyy/MM/dd'}" FontWeight="Bold" />
-                        </WrapPanel>
+                    <DataTemplate DataType="{x:Type sharedMoldels:MovieModel}">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Title: " Margin="0,0,4,0"  />
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Release Date: "  Margin="0,0,4,0" />
+                                <TextBlock Text="{Binding ReleaseDate, StringFormat='yyyy/MM/dd'}" FontWeight="Bold" />
+                            </StackPanel>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RPedretti.Grpc.Wpf.Client
+namespace RPedretti.Grpc.Client.Shared.Models
 {
     public class MovieModel
     {

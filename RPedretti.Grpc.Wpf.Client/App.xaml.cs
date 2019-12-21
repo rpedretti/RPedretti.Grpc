@@ -1,6 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Grpc.Core;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using RPedretti.Grpc.Client.Shared.Factory;
+using RPedretti.Grpc.Client.Shared.Services;
 using System;
+using System.IO;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace RPedretti.Grpc.Wpf.Client
@@ -21,19 +28,14 @@ namespace RPedretti.Grpc.Wpf.Client
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
-            services
-                .AddGrpcClient<Movies.MoviesClient>(o =>
-                {
-                    o.Address = new Uri("https://localhost:444");
-                })
-                .ConfigurePrimaryHttpMessageHandler(() =>
-                {
-                    return new HttpClientHandler
-                    {
-                        ServerCertificateCustomValidationCallback =
-                            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-                    };
-                });
+            services.AddSingleton<IMovieService, MovieService>();
+            RegisterGrpcClient(services);
+        }
+
+        private void RegisterGrpcClient(IServiceCollection services)
+        {
+            var client = MovieClientFactory.CreateClient("localhost:444");
+            services.AddSingleton(client);
         }
 
         private void OnStartup(object sender, StartupEventArgs e)
