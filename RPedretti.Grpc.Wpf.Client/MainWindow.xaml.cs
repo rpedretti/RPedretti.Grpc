@@ -71,7 +71,7 @@ namespace RPedretti.Grpc.Wpf.Client
                 })
             };
 
-            Movies = await _movieService.FindByCriteria(criteria);
+            Movies = await _movieService.FindByCriteriaAsync(criteria);
         }
 
         private void TitleInput_TextChanged(object sender, TextChangedEventArgs e)

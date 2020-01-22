@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RPedretti.Grpc.DAL.Models;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace RPedretti.Grpc.DAL.Context
 {

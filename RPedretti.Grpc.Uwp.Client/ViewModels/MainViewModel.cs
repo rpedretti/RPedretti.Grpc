@@ -5,7 +5,6 @@ using Prism.Windows.Navigation;
 using RPedretti.Grpc.Uwp.Client.Models;
 using RPedretti.Grpc.Client.Shared.Services;
 using SharedModels = RPedretti.Grpc.Client.Shared.Models;
-using Windows.UI.Xaml.Controls;
 using RJPSoft.HelperExtensions;
 
 #nullable enable
@@ -33,7 +32,7 @@ namespace RPedretti.Grpc.Uwp.Client.ViewModels
 
         public async void Search()
         {
-            Model.Movies = await _movieService.FindByCriteria(new SharedModels.SearchCriteria
+            Model.Movies = await _movieService.FindByCriteriaAsync(new SharedModels.SearchCriteria
             {
                 Title = Model.Title ?? "",
                 ReleaseDate = Model.ReleaseDate.Let(d => DateTime.SpecifyKind(d, DateTimeKind.Utc))

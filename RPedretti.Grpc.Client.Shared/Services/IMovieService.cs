@@ -6,6 +6,6 @@ namespace RPedretti.Grpc.Client.Shared.Services
 {
     public interface IMovieService
     {
-        Task<IEnumerable<MovieModel>> FindByCriteria(Models.SearchCriteria criteria);
+        Task<IEnumerable<MovieModel>> FindByCriteriaAsync(Models.SearchCriteria criteria);
     }
 }

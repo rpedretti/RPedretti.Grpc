@@ -1,0 +1,38 @@
+﻿@page "/"
+
+<h1>Movie Search</h1>
+
+<div class="form-group">
+    <label for="movieTitle">Movie Title</label>
+    <input id="movieTitle" class="form-control" type="text" @bind-value="Title" @bind-value:event="oninput" placeholder="Title" />
+</div>
+<div class="form-group">
+    <label for="releaseDate">Release date</label>
+    <input id="releaseDate" class="form-control" type="date" @bind-value="ReleaseDate" placeholder="Release Date" />
+</div>
+<button class="btn btn-primary" @onclick="@Search" disabled="@IsDisalbed">
+    @if (Searching)
+    {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    }
+    @ButtonText
+</button>
+
+@if (Searched && !Searching)
+{
+    <div style="margin-top: 40px;">
+        @if (Movies.Any())
+        {
+            <ul class="list-group">
+                @foreach (var m in Movies)
+                {
+                    <li class="list-group-item">@m.Title (@m.ReleaseDate.ToShortDateString())</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="p-3">No result</p>
+        }
+    </div>
+}

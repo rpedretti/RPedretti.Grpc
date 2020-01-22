@@ -5,6 +5,7 @@ using Google.Protobuf.WellKnownTypes;
 using System.Linq;
 using RPedretti.Grpc.DAL.Accessor;
 using RJPSoft.HelperExtensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RPedretti.Grpc.Server.Services
 {
@@ -17,6 +18,7 @@ namespace RPedretti.Grpc.Server.Services
             _moviesAccessor = moviesAccessor;
         }
 
+        [Authorize]
         public override async Task<MovieResponse> GetById(IdRequest request, ServerCallContext context)
         {
             var movie = await _moviesAccessor.GetMovieByIdAsync(request.Id);
@@ -30,6 +32,7 @@ namespace RPedretti.Grpc.Server.Services
             };
         }
 
+        [Authorize(Roles = "Admin")]
         public override async Task<MultipleMoviesReply> SearchByCriteria(SearchCriteria request, ServerCallContext context)
         {
             var movies = await _moviesAccessor.FindMoviesByCriteriaAsync(new FilterCriteria

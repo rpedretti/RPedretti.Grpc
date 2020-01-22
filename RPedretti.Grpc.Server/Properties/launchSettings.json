@@ -3,7 +3,7 @@
     "RPedretti.Grpc.Server": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://0.0.0.0:5000",
+      "applicationUrl": "https://0.0.0.0:5003",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

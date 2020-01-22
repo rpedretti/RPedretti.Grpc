@@ -6,12 +6,15 @@ services:
       volumes:
         - ./Conf/nginx.conf:/etc/nginx/nginx.conf:ro
         - ./Conf/cert.pem:/etc/ssl/server.pem:ro
-        - ./Conf/key.pem:/etc/ssl/server.key:ro
+        - ./Conf/cert.pem:/etc/ssl/server.key:ro
       ports: 
         - "444:443"
+        - "4443:4443"
     grpc-server:
       build: .
       environment: 
         ASPNETCORE_URLS: http://*:5000
       volumes:
         - ./RPedretti.Grpc.Server/data/movies.db:/app/data/movies.db:rw
+      ports:
+        - "9876:5000"
