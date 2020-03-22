@@ -1,4 +1,4 @@
-﻿using Grpc.Core;
+using Grpc.Core;
 using System;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;

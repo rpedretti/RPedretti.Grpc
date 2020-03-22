@@ -1,4 +1,4 @@
-﻿namespace RPedretti.Grpc.Uwp.Client
+namespace RPedretti.Grpc.Uwp.Client
 {
     internal static class PageTokens
     {

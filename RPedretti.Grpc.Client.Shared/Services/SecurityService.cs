@@ -1,4 +1,4 @@
-﻿using RPedretti.Grpc.Client.Shared.Configuration;
+using RPedretti.Grpc.Client.Shared.Configuration;
 using System;
 using System.Collections.Concurrent;
 using System.Net.Http;

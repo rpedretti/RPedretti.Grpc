@@ -1,4 +1,4 @@
-﻿using RJPSoft.HelperExtensions;
+using RJPSoft.HelperExtensions;
 using RPedretti.Grpc.Client.Shared.Models;
 using RPedretti.Grpc.Client.Shared.Services;
 using System;

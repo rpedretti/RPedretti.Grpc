@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RPedretti.Grpc.DAL.Models;
 using System;
 using System.Diagnostics.CodeAnalysis;

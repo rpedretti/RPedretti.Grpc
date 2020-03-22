@@ -1,4 +1,4 @@
-﻿using Prism.Mvvm;
+using Prism.Mvvm;
 using RPedretti.Grpc.Client.Shared.Models;
 using System;
 using System.Collections.Generic;

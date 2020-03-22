@@ -1,4 +1,4 @@
-﻿using RPedretti.Grpc.Client.Shared.Factory;
+using RPedretti.Grpc.Client.Shared.Factory;
 using RPedretti.Grpc.Client.Shared.Services;
 using System;
 using System.Collections.Generic;

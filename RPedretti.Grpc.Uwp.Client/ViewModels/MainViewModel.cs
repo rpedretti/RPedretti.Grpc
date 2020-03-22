@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Prism.Windows.Mvvm;
 using Prism.Windows.Navigation;

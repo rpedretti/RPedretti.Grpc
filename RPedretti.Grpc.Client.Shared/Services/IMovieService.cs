@@ -1,4 +1,4 @@
-﻿using RPedretti.Grpc.Client.Shared.Models;
+using RPedretti.Grpc.Client.Shared.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

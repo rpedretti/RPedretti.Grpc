@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 
 namespace RPedretti.Grpc.BlazorWasm.Client.Tests.Extensions
 {

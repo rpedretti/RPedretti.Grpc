@@ -1,4 +1,4 @@
-﻿using RPedretti.Grpc.DAL.Context;
+using RPedretti.Grpc.DAL.Context;
 using RPedretti.Grpc.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

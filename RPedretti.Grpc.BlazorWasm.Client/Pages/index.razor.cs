@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using RPedretti.Grpc.Client.Shared.Services;
 using SearchCriteriaModel = RPedretti.Grpc.Client.Shared.Models.SearchCriteria;
 using System;

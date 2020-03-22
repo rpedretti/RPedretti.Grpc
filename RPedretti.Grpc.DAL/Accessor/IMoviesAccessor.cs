@@ -1,4 +1,4 @@
-﻿using RPedretti.Grpc.DAL.Models;
+using RPedretti.Grpc.DAL.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

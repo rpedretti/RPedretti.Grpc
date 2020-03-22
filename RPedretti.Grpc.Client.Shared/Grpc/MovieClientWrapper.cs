@@ -1,4 +1,4 @@
-﻿using Grpc.Core;
+using Grpc.Core;
 using RPedretti.Grpc.Client.Shared.Interfaces;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using RPedretti.Grpc.Client.Shared.Interfaces;
 using RPedretti.Grpc.Client.Shared.Models;
