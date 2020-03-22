@@ -1,30 +1,32 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using AngleSharp.XPath;
+using Bunit;
+using FluentAssertions;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RPedretti.Grpc.BlazorWasm.Client.Pages;
 using RPedretti.Grpc.Client.Shared.Models;
 using RPedretti.Grpc.Client.Shared.Services;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace RPedretti.Grpc.BlazorWasm.Client.Tests.Pages
 {
-    public class IndexTests
+    public class IndexTestBUnit : ComponentTestFixture
     {
-        private readonly TestHost host = new TestHost();
         private readonly Mock<IMovieService> MovieServiceMock;
         private readonly Mock<ILogger<Index>> LoggerMock;
 
-        public IndexTests()
+        public IndexTestBUnit()
         {
             MovieServiceMock = new Mock<IMovieService>();
             LoggerMock = new Mock<ILogger<Index>>();
-            host.AddService(MovieServiceMock.Object);
-            host.AddService(LoggerMock.Object);
+            Services.AddSingleton(MovieServiceMock.Object);
+            Services.AddSingleton(LoggerMock.Object);
         }
 
         [Fact(DisplayName = "Search button should be disabled if no search term")]
@@ -32,38 +34,35 @@ namespace RPedretti.Grpc.BlazorWasm.Client.Tests.Pages
         {
             MovieServiceMock.Setup(m => m.FindByCriteriaAsync(It.IsAny<Grpc.Client.Shared.Models.SearchCriteria>()))
                 .ReturnsAsync(new List<MovieModel>());
-            var component = host.AddComponent<Index>();
+            var component = RenderComponent<Index>();
             var button = component.Find(".btn.btn-primary");
 
-            button.Attributes.Contains("disabled").Should().BeTrue();
+            button.HasAttribute("disabled").Should().BeTrue();
         }
 
         [Fact(DisplayName = "Search button should be enabled if search by title")]
-        public async Task ShouldBeEnabledIfSearchByTitle()
+        public void ShouldBeEnabledIfSearchByTitle()
         {
-            var component = host.AddComponent<Index>();
+            var component = RenderComponent<Index>();
             var titleSearch = component.Find("#movieTitle");
 
-            await titleSearch.TriggerEventAsync("oninput", new ChangeEventArgs
-            {
-                Value = "Movie Title"
-            });
+            titleSearch.Input("Movie Title");
 
-            component.Find(".btn.btn-primary").Attributes.Contains("disabled").Should().BeFalse();
+            component.Find(".btn.btn-primary").HasAttribute("disabled").Should().BeFalse();
         }
 
         [Fact(DisplayName = "Search button should be enabled if search by date")]
-        public async Task ShouldBeEnabledIfSearchByDate()
+        public void ShouldBeEnabledIfSearchByDate()
         {
-            var component = host.AddComponent<Index>();
+            var component = RenderComponent<Index>();
             var dateSearch = component.Find("#releaseDate");
-            await dateSearch.ChangeAsync("2020-01-02");
+            dateSearch.Change("2020-01-02");
 
-            component.Find(".btn.btn-primary").Attributes.Contains("disabled").Should().BeFalse();
+            component.Find(".btn.btn-primary").HasAttribute("disabled").Should().BeFalse();
         }
 
         [Fact(DisplayName = "Search button should be disabled while searching")]
-        public async Task ButtonSearchShouldBeDisabledWhileSearching()
+        public void ButtonSearchShouldBeDisabledWhileSearching()
         {
             var movieServiceLock = new SemaphoreSlim(1, 1);
 
@@ -79,35 +78,37 @@ namespace RPedretti.Grpc.BlazorWasm.Client.Tests.Pages
             movieServiceLock.Wait();
             searchTask.Start();
 
-            var component = host.AddComponent<Index>();
+            var component = RenderComponent<Index>();
             var titleSearch = component.Find("#movieTitle");
 
-            await titleSearch.TriggerEventAsync("oninput", new ChangeEventArgs
-            {
-                Value = "Movie Title"
-            });
+            titleSearch.Input("Movie Title");
 
             var button = component.Find(".btn.btn-primary");
 
             button.Click();
 
-            button = component.Find(".btn.btn-primary");
-            button.Attributes.Contains("disabled").Should().BeTrue();
-            button.SelectSingleNode("./span[@class='spinner-border spinner-border-sm']").Should().NotBeNull();
+            // assert is loading
+            button.HasAttribute("disabled").Should().BeTrue();
+
+            WaitForState(() =>
+            {
+                return button.SelectSingleNode("./span[@class='spinner-border spinner-border-sm']") != null;
+            });
 
             movieServiceLock.Release();
 
-            host.WaitForNextRender(() => { });
+            WaitForAssertion(() =>
+            {
+                button.HasAttribute("disabled").Should().BeFalse();
+                button.SelectSingleNode("./span[@class='spinner-border spinner-border-sm']").Should().BeNull();
+            });
 
-            button = component.Find(".btn.btn-primary");
-            button.Attributes.Contains("disabled").Should().BeFalse();
-            button.SelectSingleNode("./span[@class='spinner-border spinner-border-sm']").Should().BeNull();
         }
 
         [Theory(DisplayName = "Should render movie with correct date format")]
         [InlineData("pt-BR", "02/01/2020")]
         [InlineData("en-us", "1/2/2020")]
-        public async Task ShouldRenderMovie(string culture, string expectedDate)
+        public void ShouldRenderMovie(string culture, string expectedDate)
         {
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             MovieServiceMock.Setup(m => m.FindByCriteriaAsync(It.IsAny<Grpc.Client.Shared.Models.SearchCriteria>()))
@@ -123,16 +124,13 @@ namespace RPedretti.Grpc.BlazorWasm.Client.Tests.Pages
                         ReleaseDate = new System.DateTime(2020, 1, 2)
                     }
                 });
-            var component = host.AddComponent<Index>();
+            var component = RenderComponent<Index>();
             var titleSearch = component.Find("#movieTitle");
 
-            await titleSearch.TriggerEventAsync("oninput", new ChangeEventArgs
-            {
-                Value = "Movie Title"
-            });
+            titleSearch.Input("Movie Title");
 
             var button = component.Find(".btn.btn-primary");
-            button.Attributes.Contains("disabled").Should().BeFalse();
+            button.HasAttribute("disabled").Should().BeFalse();
             button.ChildNodes.Should().HaveCount(1);
 
             button.Click();
@@ -142,8 +140,8 @@ namespace RPedretti.Grpc.BlazorWasm.Client.Tests.Pages
             component.Find(".list-group").Should().NotBeNull();
             Assert.Collection(
                 component.FindAll(".list-group .list-group-item"),
-                item => item.InnerText.Should().Be($"Movie Title Complete ({expectedDate})"),
-                item => item.InnerText.Should().Be($"Other Movie Title ({expectedDate})")
+                item => item.TextContent.Should().Be($"Movie Title Complete ({expectedDate})"),
+                item => item.TextContent.Should().Be($"Other Movie Title ({expectedDate})")
             ); ;
         }
     }
