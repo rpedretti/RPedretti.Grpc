@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using RPedretti.Grpc.Client.Shared.Interfaces;
 using RPedretti.Grpc.Client.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace RPedretti.Grpc.Client.Shared.Services
 {
     public class MovieService : IMovieService
     {
-        private readonly Movies.MoviesClient _moviesClient;
+        private readonly IMoviesClient _moviesClient;
         private readonly ISecurityService _securityService;
         private string? _token;
 
-        public MovieService(Movies.MoviesClient moviesClient, ISecurityService securityService)
+        public MovieService(IMoviesClient moviesClient, ISecurityService securityService)
         {
             _moviesClient = moviesClient;
             _securityService = securityService;

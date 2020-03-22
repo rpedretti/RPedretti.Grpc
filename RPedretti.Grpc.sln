@@ -43,7 +43,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{427A50
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.Grpc.Console.Client", "RPedretti.Grpc.Console.Client\RPedretti.Grpc.Console.Client.csproj", "{07E533BB-53F0-4246-AEAB-3D0EFB507386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPedretti.Grpc.BlazorWasm.Client", "RPedretti.Grpc.BlazorWasm.Client\RPedretti.Grpc.BlazorWasm.Client.csproj", "{DBE68577-880B-40CF-99C3-F8F9AE34CCBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.Grpc.BlazorWasm.Client", "RPedretti.Grpc.BlazorWasm.Client\RPedretti.Grpc.BlazorWasm.Client.csproj", "{DBE68577-880B-40CF-99C3-F8F9AE34CCBF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AC1EF24A-A895-4EC6-8D09-565D4DE99A3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPedretti.Grpc.BlazorWasm.Client.Tests", "Tests\RPedretti.Grpc.BlazorWasm.Client.Tests\RPedretti.Grpc.BlazorWasm.Client.Tests.csproj", "{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{92EBEDAF-FEF1-47F0-8CEE-07C96535BA61}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -225,6 +234,26 @@ Global
 		{DBE68577-880B-40CF-99C3-F8F9AE34CCBF}.Release|x64.Build.0 = Release|Any CPU
 		{DBE68577-880B-40CF-99C3-F8F9AE34CCBF}.Release|x86.ActiveCfg = Release|Any CPU
 		{DBE68577-880B-40CF-99C3-F8F9AE34CCBF}.Release|x86.Build.0 = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|ARM.Build.0 = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|x64.Build.0 = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Debug|x86.Build.0 = Debug|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|ARM.ActiveCfg = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|ARM.Build.0 = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|ARM64.Build.0 = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|x64.ActiveCfg = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|x64.Build.0 = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|x86.ActiveCfg = Release|Any CPU
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -237,6 +266,7 @@ Global
 		{1A349636-8481-43D9-8B0A-D9CF1DC1743B} = {F379DF15-287A-4935-8A96-6A74BA657138}
 		{07E533BB-53F0-4246-AEAB-3D0EFB507386} = {F379DF15-287A-4935-8A96-6A74BA657138}
 		{DBE68577-880B-40CF-99C3-F8F9AE34CCBF} = {F379DF15-287A-4935-8A96-6A74BA657138}
+		{10AEF0E3-0AA0-4058-97C4-AEED1EEF8D05} = {AC1EF24A-A895-4EC6-8D09-565D4DE99A3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BCA262C8-1AFE-4B46-83F3-71BE3761C7A9}

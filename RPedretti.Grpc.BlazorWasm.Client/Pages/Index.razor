@@ -13,26 +13,33 @@
 <button class="btn btn-primary" @onclick="@Search" disabled="@IsDisalbed">
     @if (Searching)
     {
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     }
     @ButtonText
 </button>
 
 @if (Searched && !Searching)
 {
-    <div style="margin-top: 40px;">
-        @if (Movies.Any())
+    if (!Error)
+    {
+<div style="margin-top: 40px;">
+    @if (Movies.Any())
         {
-            <ul class="list-group">
-                @foreach (var m in Movies)
+    <ul class="list-group">
+        @foreach (var m in Movies)
                 {
-                    <li class="list-group-item">@m.Title (@m.ReleaseDate.ToShortDateString())</li>
+        <li class="list-group-item">@m.Title (@m.ReleaseDate.ToShortDateString())</li>
                 }
-            </ul>
+    </ul>
         }
         else
         {
-            <p class="p-3">No result</p>
+    <p class="p-3">No result</p>
         }
-    </div>
+</div>
+    }
+    else
+    {
+<p>Ops...something went wrong...</p>
+    }
 }

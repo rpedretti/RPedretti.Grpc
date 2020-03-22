@@ -59,4 +59,36 @@
     <genTemplate:Item Name="framework" Value="Prism" />
     <genTemplate:Item Name="platform" Value="Uwp" />
   </genTemplate:Metadata>
+
+  <Extensions>
+
+  
+
+  <Extension Category="windows.certificates">
+
+  
+
+  
+
+  <Certificates>
+
+  
+
+  
+
+  
+
+  <Certificate StoreName="trustedPeople" Content="pub.pem"/>
+
+  
+
+  
+
+  </Certificates>
+
+  
+
+  </Extension>
+
+  </Extensions>
 </Package>

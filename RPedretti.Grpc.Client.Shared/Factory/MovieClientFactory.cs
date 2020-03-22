@@ -1,4 +1,6 @@
 ﻿using Grpc.Core;
+using RPedretti.Grpc.Client.Shared.Grpc;
+using RPedretti.Grpc.Client.Shared.Interfaces;
 using System;
 using System.IO;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace RPedretti.Grpc.Client.Shared.Factory
 {
     public class MovieClientFactory
     {
-        public static Movies.MoviesClient CreateClient(string host)
+        public static IMoviesClient CreateClient(string host)
         {
             var assembly = Assembly.GetEntryAssembly();
             var resourceNames = assembly.GetManifestResourceNames();
@@ -18,7 +20,7 @@ namespace RPedretti.Grpc.Client.Shared.Factory
             var cert = reader.ReadToEnd();
 
             var channel = new Channel(host, new SslCredentials(cert));
-            return new Movies.MoviesClient(channel);
+            return new MovieClientWrapper(new Movies.MoviesClient(channel));
         }
     }
 }

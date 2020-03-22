@@ -1,6 +1,7 @@
 ﻿using Grpc.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using RPedretti.Grpc.Client.Shared.Configuration;
 using RPedretti.Grpc.Client.Shared.Factory;
 using RPedretti.Grpc.Client.Shared.Services;
 using System;
@@ -29,6 +30,9 @@ namespace RPedretti.Grpc.Wpf.Client
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<IMovieService, MovieService>();
+            services.AddSingleton<ISecurityService, SecurityService>();
+            services.AddHttpClient<ISecurityService, SecurityService>();
+            services.AddSingleton<IGrpcServerConfig>(new AppConfig { Url = "https://localhost:444" });
             RegisterGrpcClient(services);
         }
 
