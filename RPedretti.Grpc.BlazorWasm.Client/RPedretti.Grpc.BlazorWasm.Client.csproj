@@ -28,7 +28,7 @@
     <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="3.2.0-preview2.20160.5" />
 
     <!-- gRPC-Web packages -->
-    <PackageReference Include="Google.Protobuf" Version="3.11.4" />
+    <PackageReference Include="Google.Protobuf" Version="3.15.0" />
     <PackageReference Include="Grpc.Net.Client" Version="2.28.0-pre2" />
     <PackageReference Include="Grpc.Net.Client.Web" Version="2.28.0-pre2" />
     <PackageReference Include="Grpc.Tools" Version="2.28.0-pre3">
